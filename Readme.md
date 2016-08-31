@@ -1,6 +1,6 @@
 # unpkg-bot
 
-Bot to convert npmcdn urls to unpkg.
+Bot to convert unpkg urls to unpkg.
 
 Log in to https://unpkg-bot.herokuapp.com/ to:
 

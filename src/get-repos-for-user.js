@@ -4,7 +4,7 @@ import {get} from './read-client';
 export default function getReposForUser(username) {
   return new Promise((resolve, reject) => {
     const repos = [];
-    processPage(get('/search/code', {q: 'npmcdn user:' + username}));
+    processPage(get('/search/code', {q: 'unpkg user:' + username}));
     function processPage(page) {
       page.done(p => {
         p.items.forEach(item => {

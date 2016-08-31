@@ -24,7 +24,7 @@ client.exists = function (owner, repo) {
 function codemodRepo(fullName) {
   const [owner, name] = fullName.split('/');
 
-  return client.exists('npmcdn-to-unpkg-bot', name).then(exists => {
+  return client.exists('unpkg-to-unpkg-bot', name).then(exists => {
     if (exists) {
       return;
     }
@@ -60,23 +60,23 @@ function codemodRepo(fullName) {
         return new Promise(resolve => setTimeout(resolve, 10000));
       }).then(() => {
         console.log('branching ' + fullName);
-        return client.branch('npmcdn-to-unpkg-bot', name, 'master', 'npmcdn-to-unpkg');
+        return client.branch('unpkg-to-unpkg-bot', name, 'master', 'unpkg-to-unpkg');
       }).then(() => {
         console.log('committing ' + fullName);
-        return client.commit('npmcdn-to-unpkg-bot', name, {
-          branch: 'npmcdn-to-unpkg',
-          message: 'Replace npmcdn.com with unpkg.com',
+        return client.commit('unpkg-to-unpkg-bot', name, {
+          branch: 'unpkg-to-unpkg',
+          message: 'Replace unpkg.com with unpkg.com',
           updates,
         });
       }).then(() => {
         console.log('submitting pull request ' + fullName);
         return client.pull(
-          {user: 'npmcdn-to-unpkg-bot', repo: name, branch: 'npmcdn-to-unpkg'},
+          {user: 'unpkg-to-unpkg-bot', repo: name, branch: 'unpkg-to-unpkg'},
           {user: owner, repo: name},
           {
-            title: 'Replace npmcdn.com with unpkg.com',
+            title: 'Replace unpkg.com with unpkg.com',
             body: (
-              'To avoid potential naming conflicts with npm, npmcdn.com is being renamed to unpkg.com. This is an ' +
+              'To avoid potential naming conflicts with npm, unpkg.com is being renamed to unpkg.com. This is an ' +
               'automated pull request to update your project to use the new domain.'
             ),
           },
